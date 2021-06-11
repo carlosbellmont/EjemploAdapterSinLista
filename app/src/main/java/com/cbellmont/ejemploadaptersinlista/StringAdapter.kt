@@ -14,16 +14,19 @@ class StringAdapter : RecyclerView.Adapter<StringAdapter.StringViewHolder>()  {
 
     var numeroDeFilas = 5
 
+    // Aquí solo obtenemos las vistas que están dentro de layout en el que queremos mostrar nuestros elementos
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StringViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item, parent, false)
         val twTextView = view.findViewById<TextView>(R.id.textView)
         return StringViewHolder(view, twTextView)
     }
 
+    // Aquí devolvemos el número de elementos que habrá en nuestro recylcerView
     override fun getItemCount(): Int {
         return numeroDeFilas
     }
 
+    // Aquí ponermos en el layout vacío que hemos creado en el onCreateViewHolder los datos del elemento
     override fun onBindViewHolder(holder: StringViewHolder, position: Int) {
         holder.textView.text = position.toString()
     }
