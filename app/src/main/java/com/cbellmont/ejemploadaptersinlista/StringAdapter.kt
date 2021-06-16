@@ -1,24 +1,22 @@
 package com.cbellmont.ejemploadaptersinlista
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.cbellmont.ejemploadaptersinlista.databinding.ItemBinding
 
 class StringAdapter : RecyclerView.Adapter<StringAdapter.StringViewHolder>()  {
 
-    class StringViewHolder(var root: View, var textView: TextView) : RecyclerView.ViewHolder(root)
+    lateinit var binding : ItemBinding
+
+    class StringViewHolder(var itemBinding : ItemBinding) : RecyclerView.ViewHolder(itemBinding.root)
 
     var numeroDeFilas = 5
 
     // Aquí solo obtenemos las vistas que están dentro de layout en el que queremos mostrar nuestros elementos
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StringViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item, parent, false)
-        val twTextView = view.findViewById<TextView>(R.id.textView)
-        return StringViewHolder(view, twTextView)
+        binding = ItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return StringViewHolder(binding)
     }
 
     // Aquí devolvemos el número de elementos que habrá en nuestro recylcerView
@@ -28,7 +26,7 @@ class StringAdapter : RecyclerView.Adapter<StringAdapter.StringViewHolder>()  {
 
     // Aquí ponermos en el layout vacío que hemos creado en el onCreateViewHolder los datos del elemento
     override fun onBindViewHolder(holder: StringViewHolder, position: Int) {
-        holder.textView.text = position.toString()
+        holder.itemBinding.textView.text = position.toString()
     }
 
 }
